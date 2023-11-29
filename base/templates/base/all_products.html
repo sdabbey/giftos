@@ -1,0 +1,202 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+
+  
+  
+
+
+
+{% block content %}
+<style>
+    .shop_section .container span.section-title{
+        font-size: 1.5rem;
+        font-weight: bold !important;
+    }
+    .shop_section .container hr{
+        width: 10%;
+        height: 5px;
+        border: none;
+        border-radius: 10px 10px;
+        background: rgb(216, 81, 28);
+        display: flex;
+        align-items: flex-start;
+        margin-left: 0;
+       
+        
+    }
+    .shop_section .container hr.one{
+        width: 10%;
+        margin-top: .5rem;
+        margin-bottom: .2rem;
+       
+        
+    }
+    .shop_section .container hr.two{
+        width: 5%;
+        margin: 0;
+    }
+</style>
+  <section class="shop_section">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2 class="pt-4">
+          All Products
+        </h2>
+      </div>
+      <!-- Jerseys -->
+      <span class="section-title layout_padding" style="font-weight: bold;">Jerseys</span>
+      <hr class="one">
+      <hr class="two">
+      <div class="row layout_padding-bottom">
+        {% for jersey in jerseys %}
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="box">
+            <a href="{% url 'product-detail' jersey.id %}">
+              <div class="img-box">
+                <img src="{{jersey.image.url}}" alt="">
+              </div>
+              <div class="detail-box">
+                <h6>
+                  {{jersey.name}}
+                </h6>
+                <br>
+                <h6>
+                  
+                  <span>
+                    GH&#8373; {{jersey.price}}
+                  </span>
+                </h6>
+              </div>
+              
+            </a>
+            <div class="product-action">
+              <a href="#" class="btn btn-cart-dark update-cart" data-product="{{jersey.id}}" data-action="add">Add to Cart</a>
+              <a href="#" class="btn btn-cart">Buy</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+       
+      </div>
+      
+      <!-- Flowers -->
+      <span class="section-title">Flowers</span>
+      <hr class="one">
+      <hr class="two">
+      <div class="row layout_padding-bottom">
+       
+       {% for flower in flowers  %}
+       <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="box">
+          <a href="{% url 'product-detail' flower.id %}">
+            <div class="img-box">
+              <img src="{{flower.image.url}}" alt="">
+            </div>
+            <div class="detail-box">
+              <h6>
+                {{flower.name}}
+              </h6>
+              <h6>
+              
+                <span>
+                  GH&#8373; {{flower.price}}
+                </span>
+              </h6>
+            </div>
+            
+          </a>
+          <div class="product-action">
+            <a href="#" class="btn btn-cart-dark update-cart" data-product="{{flower.id}}" data-action="add">Add to Cart</a>
+            <a href="#" class="btn btn-cart">Buy</a>
+          </div>
+        </div>
+      </div>
+       {% endfor %}
+       
+      </div>
+
+      <!-- Watches -->
+      <span class="section-title">Watches</span>
+      <hr class="one">
+      <hr class="two">
+      <div class="row layout_padding-bottom">
+       
+       
+        {% for watch in watches %}
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="box">
+            <a href="{% url 'product-detail' watch.id %}">
+              <div class="img-box">
+                <img src="{{watch.image.url}}" alt="">
+              </div>
+              <div class="detail-box">
+                <h6>
+                  {{watch.name}}
+                </h6>
+                <h6>
+                  
+                  <span>
+                    GH&#8373; {{watch.price}}
+                  </span>
+                </h6>
+              </div>
+              
+            </a>
+            <div class="product-action">
+              <a href="#" class="btn btn-cart-dark update-cart" data-product="{{watch.id}}" data-action="add">Add to Cart</a>
+              <a href="#" class="btn btn-cart">Buy</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+       
+        
+      </div>
+      
+
+      <!-- Rings -->
+      <span class="section-title">Casual Wear rings</span>
+      <hr class="one">
+      <hr class="two">
+      <div class="row layout_padding-bottom">
+        {% for ring in rings %}
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="box">
+            <a href="{% url 'product-detail' ring.id %}">
+              <div class="img-box">
+                <img src="{{ring.image.url}}" alt="">
+              </div>
+              <div class="detail-box">
+                <h6>
+                  {{ring.name}}
+                </h6>
+                <h6>
+                  
+                  <span>
+                    GH&#8373; {{ring.price}}
+                  </span>
+                </h6>
+              </div>
+              
+            </a>
+            <div class="product-action">
+              <a href="#" class="btn btn-cart-dark update-cart" data-product="{{watch.id}}" data-action="add">Add to Cart</a>
+              <a href="#" class="btn btn-cart">Buy</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+       
+      </div>
+    </div>
+  </section>
+
+  
+{% endblock content %}
+
+  
+
+
+
+ 
