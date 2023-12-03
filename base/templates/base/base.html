@@ -59,12 +59,18 @@
     .user_option a.cart{
       display:flex;
     }
-    .user_option a.cart span{
+    .user_option a.cart span,
+    .alternate-cart span{
       position: absolute;
       margin-top: -1rem;
       margin-left: 1rem;
       color: #db4f66;
       font-weight: bold;
+    }
+    
+    .alternate-cart{
+      color: #db4f66;
+      display: flex;
     }
   </style>
 </head>
@@ -74,15 +80,19 @@
   <div class="hero_area">
     <!-- header section strats -->
     <header class="header_section">
-      <nav class="navbar navbar-expand-lg custom_nav-container ">
+      <nav class="navbar navbar-expand-lg custom_nav-container fixed-top">
         <a class="navbar-brand" href="{% url 'homepage' %}">
           <span>
             PAPSI's WORLD
           </span>
         </a>
-        <a class="ml-auto mr-5 d-lg-none d-md-block" href="{% url 'cart' %}">
+        <a class="ml-auto mr-5 d-lg-none d-md-block alternate-cart" href="{% url 'cart' %}">
           <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-          <span>0</span>
+          {% if cartItems == 0 %}
+          <span></span>
+          {% else %}
+          <span>{{cartItems}}</span>
+          {% endif %}
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class=""></span>
