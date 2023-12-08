@@ -53,3 +53,6 @@ if (cart == undefined){
 }
 console.log("Cart:", cart)
 
+
+
+//Buy Now Feature

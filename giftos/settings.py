@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-2cap7iscav$_1hpj-s=u4hfk)l%(zlccj#*&87_yoi!klnq!li
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ['https://5bdc-154-160-0-89.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://giftos.up.railway.app']
 
 
 # Application definition

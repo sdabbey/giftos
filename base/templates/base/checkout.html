@@ -95,11 +95,12 @@
   //Payment
   document.getElementById('make-payment').addEventListener('click', function(){
     //submitFormData()
+   
     makePayment()
   })
 
   function makePayment() {
-    
+
     if (user != "AnonymousUser"){
       let handler = PaystackPop.setup({
         key: 'pk_test_bd6a6eb65b4c2966f303176e3dc55b25a74799ac', // Replace with your public key
