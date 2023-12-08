@@ -1,0 +1,1 @@
+web: gunicorn giftos.wsgi --log-file -

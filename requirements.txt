@@ -124,3 +124,11 @@ zipp==3.16.2
 zorin-appearance==4.1
 zorin-connect==1.2
 zorin-exec-guard==1.5
+asgiref==3.7.2
+backports.zoneinfo==0.2.1
+Django==4.2.7
+gunicorn==21.2.0
+packaging==23.2
+Pillow==10.1.0
+sqlparse==0.4.4
+typing-extensions==4.8.0
