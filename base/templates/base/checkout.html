@@ -43,7 +43,7 @@
       <div class="box-element hidden" id="payment-info">
         <small>Payment Options</small>
       
-        <button id="make-payment">Make payment</button>
+        <button id="make-payment" onclick="makePayment()">Make payment</button>
       </div>
     </div>
 
@@ -102,26 +102,14 @@
   function makePayment() {
 
     if (user != "AnonymousUser"){
-      let handler = PaystackPop.setup({
-        key: 'pk_test_bd6a6eb65b4c2966f303176e3dc55b25a74799ac', // Replace with your public key
-        email: user.email,
-        amount: "{{order.get_cart_total}}" * 100,
-        currency: "GHS",
-        ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
-        // label: "Optional string that replaces customer email"
-        onClose: function(){
-          alert('Window closed.');
-        },
-        callback: function(response){
-          let message = 'Payment complete! Reference: ' + response.reference;
-          alert(message);
-          submitFormData();
-        }
-      });
+      user_email = "{{request.user.email}}"
     }else{
+      user_email = form.email.value
+    }
+  
       let handler = PaystackPop.setup({
         key: 'pk_test_bd6a6eb65b4c2966f303176e3dc55b25a74799ac', // Replace with your public key
-        email: form.email.value,
+        email: user_email,
         amount: "{{order.get_cart_total}}" * 100,
         currency: "GHS",
         ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
@@ -134,8 +122,7 @@
           alert(message);
           submitFormData();
         }
-      });
-    }
+      })
 
     handler.openIframe();
   }
