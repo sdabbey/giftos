@@ -88,10 +88,19 @@
         </a>
         <a class="ml-auto mr-5 d-lg-none d-md-block alternate-cart" href="{% url 'cart' %}">
           <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-          {% if cartItems == 0 %}
-          <span></span>
+          {% if request.user.is_authenticated %}
+            {% if cartItems == 0 %}
+            <span></span>
+            {% else %}
+            <span>{{cartItems}}</span>
+            {% endif %}
+
           {% else %}
-          <span>{{cartItems}}</span>
+            {% if cartItems == 0 %}
+            <span class="cart-basket"></span>
+            {% else %}
+            <span class="cart-basket">{{cartItems}}</span>
+            {% endif %}
           {% endif %}
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -140,7 +149,20 @@
             {% endif %}
             <a class="cart {% if request.path == '/cart/' %}activated-cart{% endif %}" href="{% url 'cart' %}">
               <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-              <span>{{cartItems}}</span>
+              {% if request.user.is_authenticated %}
+                {% if cartItems == 0 %}
+                <span></span>
+                {% else %}
+                <span>{{cartItems}}</span>
+                {% endif %}
+
+              {% else %}
+                {% if cartItems == 0 %}
+                <span class="cart-basket"></span>
+                {% else %}
+                <span class="cart-basket">{{cartItems}}</span>
+                {% endif %}
+              {% endif %}
             </a>
             <form class="form-inline ">
               <button class="btn nav_search-btn" type="submit">

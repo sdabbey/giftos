@@ -17,8 +17,14 @@
         <br>
         <table class="table">
           <tr>
+            {% if request.user.is_authenticated %}
             <th><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></th>
             <th><h5>Total: <strong>GH&#8373; {{order.get_cart_total}}</strong></h5></th>
+            
+            {% else %}
+            <th><h5>Items: <strong id="overall-total-quantity">{{order.get_cart_items}}</strong></h5></th>
+            <th><h5>Total: <strong id="overall-total-cost">{{order.get_cart_total}}</strong></h5></th>
+            {% endif %}
             <th>
               <a href="{% url 'checkout' %}" class="btn btn-success">Checkout</a>
             </th>
@@ -37,19 +43,36 @@
         </div>
 
        {% for item in items  %}
-        <div class="cart-row">
+        {% if request.user.is_authenticated %}
+          <div class="cart-row">
+            <div style="flex:1"><img class="row-img" src="{{item.product.image.url}}" alt=""></div>
+            <div style="flex:2"><p>{{item.product.name}}</p></div>
+            <div style="flex:1"><p class="unit-price">{{item.product.price}}</p></div>
+            <div class="anom" style="flex:1">
+              <p>{{item.quantity}}</p>
+              <span class="quantity">
+                <i data-product="{{item.product.id}}" data-action="add" class="fa fa-chevron-up chg-quantity update-cart"></i>
+                <i data-product="{{item.product.id}}" data-action="remove" class="fa fa-chevron-down chg-quantity update-cart"></i>
+              </span>
+            </div>
+            <div style="flex:1">GH&#8373; {{item.get_total}}</div>
+          </div>
+        
+        {% else %}
+        <div class="cart-row cart-row-item" data-product-id="{{item.product.id}}">
           <div style="flex:1"><img class="row-img" src="{{item.product.image.url}}" alt=""></div>
           <div style="flex:2"><p>{{item.product.name}}</p></div>
-          <div style="flex:1"><p>GH&#8373; {{item.product.price}}</p></div>
+          <div style="flex:1"><p class="unit-price">{{item.product.price}}</p></div>
           <div class="anom" style="flex:1">
-            <p>{{item.quantity}}</p>
+            <p class="quantity-number">{{item.quantity}}</p>
             <span class="quantity">
               <i data-product="{{item.product.id}}" data-action="add" class="fa fa-chevron-up chg-quantity update-cart"></i>
               <i data-product="{{item.product.id}}" data-action="remove" class="fa fa-chevron-down chg-quantity update-cart"></i>
             </span>
           </div>
-          <div style="flex:1">GH&#8373; {{item.get_total}}</div>
+          <div class="total-price" style="flex:1">GH&#8373; {{item.get_total}}</div>
         </div>
+        {% endif %}
        {% endfor %}
       </div>
     </div>

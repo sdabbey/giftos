@@ -564,7 +564,7 @@ a:focus {
       border-top: 1px solid rgba(0, 0, 0, 0.089);
       padding: 10px 0;
       justify-content: space-between;
-      a.btn-cart{
+      .btn-cart{
         color: #f16179;
         border: 1px solid #f16179;
         padding: 10px 1.5rem;
@@ -577,7 +577,7 @@ a:focus {
           color: white;
         }
       }
-      a.btn-cart-dark{
+      .btn-cart-dark{
         color: black !important;
         border: 1px solid black;
         padding: 10px;
