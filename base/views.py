@@ -3,7 +3,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .forms import UserRegistrationForm
 from django.contrib import messages
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from django.core.mail import send_mail
+import math,random
+from django.conf import settings
 import datetime
 from .models import *
 import json
@@ -71,7 +74,26 @@ def create_user(request):
         form = UserRegistrationForm()
     return render(request, 'base/register.html', {'form': form})
 
-# Create your views here.
+
+#OTP
+def generateOTP():
+    digits = "0123456789"
+    OTP = ""
+    for i in range(4):
+        OTP += digits[math.floor(random.random() * 10)]
+    return OTP
+
+def send_otp(request):
+    email=request.POST.get("email")
+    print(email)
+    o=generateOTP()
+    from_email = settings.EMAIL_HOST_USER
+    htmlgen = f'<h1> Welcome to Giftos </h1><br><p> Your OTP is <strong>{o}</strong></p>'
+    send_mail('OTP request', o, from_email, [email], fail_silently=False, html_message=htmlgen)
+    return HttpResponse(o)
+
+
+
 def home(request):
     cart_data = cartData(request)
 

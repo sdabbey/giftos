@@ -8,7 +8,7 @@
 
 {% block content %}
 
-  <section class="shop_section">
+  <section class="shop_section" style="margin-top: 15vh;">
     
     <div class="container">
       <a id="back-to-shop-btn" class="btn btn-outline-dark" style="margin-top: 20px;">&#x2190; Go Back</a>
@@ -30,7 +30,7 @@
             <div class="right-section">
               <div class="action-btns">
                 <a href="#" class="btn update-cart" data-product="{{product.id}}" data-action="add">Add to Cart</a>
-                <a href="#" class="btn">Buy Now</a>
+                <a href="#" class="btn buy-now" data-product="{{product.id}}" data-action="add">Buy</a>
               </div>
               <div class="reviews">
                 <h4>Product Reviews</h4>

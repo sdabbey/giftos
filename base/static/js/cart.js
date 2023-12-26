@@ -146,8 +146,56 @@ function updateUserOrder(productId, action){
     })
 }
 
+function update2UserOrder(productId, action){
+    var url = '/update_item/'
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body:JSON.stringify({
+            'productId': productId,
+            'action': action
+        })
+    })
+    .then((response) =>{
+        return response.json()
+    })
+    .then((data) =>{
+        console.log(data)
+        window.location.href = "/checkout/"
+        
+    })
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     updateCartDisplay();
 
 
 });
+
+
+//Buy now Feature
+
+var buyBtns = document.getElementsByClassName('buy-now')
+
+for (i = 0; i < buyBtns.length; i++){
+    buyBtns[i].addEventListener('click', function(e){
+        e.preventDefault();
+        var productId = this.dataset.product
+        var action = this.dataset.action
+        console.log("productId:", productId, 'Action:', action)
+        console.log("user:", user)
+
+        if(user === "AnonymousUser"){
+            addCookieItem(productId, action)
+            window.location.href = "/checkout/"
+        }else{
+            update2UserOrder(productId, action)
+            
+
+        }
+        
+    })
+}

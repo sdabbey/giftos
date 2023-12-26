@@ -92,9 +92,11 @@ body {
 /*header section*/
 .hero_area {
   padding: 0 45px;
-  
+ 
   box-sizing: border-box;
+  position: relative;
 
+  
   
 }
 
@@ -117,6 +119,112 @@ body {
   }
 
 }
+
+.verification-modal{
+  position: fixed;
+  top:0;
+  width:100vw;
+  height: 100vh;
+  background-color: #2221203d;
+  display: none;
+  align-content: center;
+  justify-content: center;
+  z-index: 2223;
+
+  animation: slide .33s cubic-bezier(0.075, 0.82, 0.165, 1);
+  section.content{
+    background-color: white;
+    padding: 3rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h2{
+      font-weight: 600;
+      font-size: 1.42rem;
+      text-align: center;
+    }
+    p{
+      text-align: center;
+      width: 70%;
+      font-size: .9rem;
+      margin:1rem 0;
+    }
+
+    ul.buttons{
+      display: flex;
+     
+      padding: 0;
+      li{
+        list-style: none;
+        display: inline-flex;
+        margin:0 .16rem;
+        button{
+          height: 2.5rem;
+          width: 3rem;
+          background: #ee9071;
+          border: none;
+          outline: none;
+          border-radius: .3rem;
+          font-size: 1.09rem;
+          font-weight: 600;
+          padding: 0;
+        }
+        button.verify{
+          margin-top: 1rem;
+        }
+        
+      }
+    }
+    input[type='number']{
+      border:none;
+      outline: none;
+      opacity: 0;
+    }
+    
+    button.verify{
+      border:none;
+      outline: none;
+      border-radius: 12px 12px;
+      padding: .9rem 0;
+      width: calc(80% + 1.6rem);
+      background-color: #ee9071;
+      margin-top: 2.5rem;
+      color:white;
+      text-transform: uppercase;
+      letter-spacing: .2rem;
+      line-height: .5em;
+      font-size: 1.02rem;
+  }
+
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #navbarSupportedContent {
   width: 100%;
@@ -214,7 +322,7 @@ a:focus {
 
 
 .custom_nav-container {
-  z-index: 99999;
+  z-index: 223;
   padding:0 45px;
   flex-direction: column;
   align-items: center;
@@ -301,7 +409,7 @@ a:focus {
 .slider_section {
   width: 100%;
   margin: 0;
-  margin-top: 20vh;
+  margin-top: 10%;
   
   max-height: 90vh;
   box-sizing: border-box;
@@ -312,6 +420,7 @@ a:focus {
     padding: 25px;
     border-radius: 0 0 15px 15px;
     height: 100%;
+    
   }
 
   .row {
@@ -544,7 +653,7 @@ a:focus {
 
 // shop section
 .shop_section {
-  margin-top: 20vh;
+  margin-top: 10vh;
   .heading_container {
     margin-bottom: 20px;
   }
@@ -657,6 +766,18 @@ a:focus {
   width: 250px;
   display: inline-block;
   padding: 5px;
+
+  /* Standard syntax */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
 }
 .cart-row{
   display: flex;

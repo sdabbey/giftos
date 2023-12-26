@@ -1,5 +1,5 @@
 {% extends 'base/base.html' %}
-
+{% load static %}
 {% block header_section %}
 <header class="header_section">
   <nav class="navbar navbar-expand-lg custom_nav-container ">
@@ -57,6 +57,7 @@
 </header>
 {% endblock header_section %}
 {% block content %}
+
 <div class="container account">
     <div class="row center">
         <div class="col-md-6 offset-md-3">
@@ -72,12 +73,106 @@
                 {% endfor %}
             </div>
             {% endif %}
-            <form action="" method="POST">
+            <form action="" method="POST" id="sign_up-form">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit" class="btn btn-primary">Sign Up</button>
+                <button type="submit" id="submit-btn" style="display: none;"></button>
+                <button id="submit-verify" type="button" class="btn btn-primary">Sign Up</button>
             </form>
         </div>
     </div>
 </div>
+<div class="verification-modal" id="verification-modal">
+  <form>
+   
+      <section class="content">
+          <h2>Enter Verification Code</h2>
+          <p id="otp-message">Enter code that we have sent to metryout@gmail.com</p>
+          <ul class="buttons">
+              <li>
+                  <button></button>
+              </li>
+              <li>
+                  <button></button>
+              </li>
+              <li>
+                  <button></button>
+              </li>
+              <li>
+                  <button></button>
+              </li>
+          </ul>
+        
+          <input type="number" name="code" id="code" maxlength=4>
+          <button class="verify" type="button" onclick="verify_otp()" >Verify</button>
+  </form>
+  </section>
+</div>
+
+<script>
+  
+  //Show Modal
+  var verify_btn = document.getElementById("submit-verify")
+  verify_btn.addEventListener("click", () =>{
+  
+    var username = document.getElementById("id_username")
+    var email = document.getElementById("id_email")
+    var password1 = document.getElementById("id_password1")
+    var password2 = document.getElementById("id_password2")
+    const verificationModal = document.querySelector('.verification-modal');
+  
+    if (username.value.trim() !== "" && email.value.trim() !== "" && password1.value.trim() !== "" && password2.value.trim() !== "" && password1.value.trim()==password2.value.trim()) {
+        verificationModal.style.display = 'grid';
+
+        // Perform your AJAX logic here
+        ajax_send_otp();
+    }else{
+      alert("Please enter details correctly")
+    }
+    
+    
+  })
+
+
+  //Send OTP section
+  var otp_from_back="";
+  function ajax_send_otp(){
+     
+      var email = document.getElementById("id_email")
+     
+      $.post("send_otp",
+      {
+          "email": email.value,
+          "csrfmiddlewaretoken": "{{csrf_token}}"
+      },
+      function(data, status){
+          if(status=="success"){
+              otp_from_back = data;
+
+          }
+      });
+  }
+
+  function verify_otp(){
+      var email = document.getElementById("id_email").value
+      var user_otp=document.getElementById("code").value;
+      if (user_otp==otp_from_back){
+          document.getElementById('verification-modal').style.display='none'
+          document.getElementById('id_email').innerHTML = email
+          
+          document.getElementById("submit-btn").click()
+      }
+      else{
+          document.getElementById("otp-message").style.color="red";
+          document.getElementById("otp-message").innerHTML="Try Again!!";
+      }
+    } 
+
+
+  
+
+
+
+
+</script>
 {% endblock %}

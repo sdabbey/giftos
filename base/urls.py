@@ -4,6 +4,7 @@ urlpatterns = [
     path('login/', login_user, name='login'),
     path('logout/', logout_user, name='logout'),
     path('register/', create_user, name='register'),
+    path('register/send_otp', send_otp, name="send_otp"),
     path('', home, name="homepage" ),
     path('shop/', shop, name="shop"),
     path('shop/all-products', all_products, name="all-products"),
