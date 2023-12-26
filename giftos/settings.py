@@ -77,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'giftos.wsgi.application'
+WSGI_APPLICATION = 'giftos.wsgi.app'
 
 
 # Database
