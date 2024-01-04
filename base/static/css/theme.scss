@@ -41,6 +41,15 @@ body {
   @include main-font;
   color: #101010;
   background-color: #ffffff;
+  &::-webkit-scrollbar{
+    width: 10px;
+    background-color:#e7e7e7;
+    
+}
+&::-webkit-scrollbar-thumb{
+    background-color: black;
+   
+}
 }
 
 .layout_padding {
@@ -199,32 +208,6 @@ body {
 
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #navbarSupportedContent {
   width: 100%;

@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.http import JsonResponse, HttpResponse
 from django.core.mail import send_mail
 import math,random
+from django.db.models import Q
 from django.conf import settings
 import datetime
 from .models import *
@@ -157,6 +158,17 @@ def checkout(request):
     }
     return render(request, "base/checkout.html", context)
 
+def search(request):
+    search_product(request)
+    return render(request, "base/search.html")
+
+def search_product(request):
+    search_product = request.GET.get('search')
+    if search_product:
+        product = Product.objects.filter(Q(name__icontains=search_product)| Q(type__icontains=search_product))
+    else:
+        product = Product.objects.all().order_by("-created_at")
+    return render(request, "base/search.html", {"products": product})
 
 def updateItem(request):
     data = json.loads(request.body)

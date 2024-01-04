@@ -17,7 +17,7 @@
               <input type="text" class="form-control" required name="name" placeholder="Name..." value="{% if request.user.is_authenticated %}{{request.user.username}}{% endif %}" {% if request.user.is_authenticated %}readonly{% endif %}>
             </div>
             <div class="form-field">
-              <input type="email" class="form-control" required name="email" placeholder="Email..." value="{% if request.user.is_authenticated %}{{request.user.email}}{% endif %}" {% if request.user.is_authenticated %}readonly{% endif %}>
+              <input type="email" class="form-control" id="email" required name="email" placeholder="Email..." value="{% if request.user.is_authenticated %}{{request.user.email}}{% endif %}" {% if request.user.is_authenticated %}readonly{% endif %}>
             </div>
             <div class="form-field">
               <input type="number" class="form-control" required name="phonenumber" placeholder="Phone number...">
@@ -79,7 +79,7 @@
 
  <script type="text/javascript">
   var shipping = '{{order.shipping}}'
-
+  var user_email = '{{ request.user.email }}'
   var total = '{{order.get_cart_total}}'
 
 
@@ -106,32 +106,37 @@
   })
 
   function makePayment() {
+    // Check if the user is AnonymousUser
+    if (user === "AnonymousUser") {
+        // Store the current URL before redirecting to the register page
+        var user_email = document.getElementById("email").value
 
-    if (user != "AnonymousUser"){
-      user_email = "{{request.user.email}}"
-    }else{
-      user_email = form.email.value
+        
     }
-  
-      let handler = PaystackPop.setup({
+
+    // Continue with payment logic
+    let handler = PaystackPop.setup({
         key: 'pk_test_bd6a6eb65b4c2966f303176e3dc55b25a74799ac', // Replace with your public key
-        email: user_email,
-        amount: "{{order.get_cart_total}}" * 100,
+        email: user_email, // Use the authenticated user's email
+        amount: "{{ order.get_cart_total }}" * 100,
         currency: "GHS",
-        ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
-        // label: "Optional string that replaces customer email"
-        onClose: function(){
-          alert('Window closed.');
+        ref: '' + Math.floor((Math.random() * 1000000000) + 1),
+        onClose: function () {
+            alert('Window closed.');
         },
-        callback: function(response){
-          let message = 'Payment complete! Reference: ' + response.reference;
-          alert(message);
-          submitFormData();
+        callback: function (response) {
+            let message = 'Payment complete! Reference: ' + response.reference;
+            alert(message);
+            submitFormData();
         }
-      })
+    });
 
     handler.openIframe();
-  }
+}
+
+
+
+
   function submitFormData(){
     console.log("Payment button clicked")
 
@@ -159,7 +164,7 @@
       
     }
     
-
+    const csrftoken = "{{ csrf_token }}"
     var url = '/process_order/'
     fetch(url, {
         method: 'POST',

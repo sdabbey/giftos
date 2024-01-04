@@ -1,0 +1,54 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block link %}
+  <link rel="stylesheet" href="{% static 'css/search.css' %}">
+{% endblock link %}
+{% block content %}
+<div class="search-container">
+    <form class="searchbox" action="{% url 'search-product' %}">
+        <input type="search" class="form-control" placeholder="Search for products here..." name="search" id="">
+        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
+    </form>
+    <section class="shop_section">
+        <div class="row">
+            {% for product in products|dictsortreversed:"created_at"|slice:":8" %}
+              <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="box">
+                  <a href="{% url 'product-detail' product.id %}">
+                    <div class="img-box">
+                      <img src="{{product.image.url}}" alt="">
+                    </div>
+                    <div class="detail-box">
+                      <h6>
+                        {{product.name}}
+                      </h6>
+                      <br>
+                      <h6>
+                     
+                        <span>
+                          GH&#8373; {{product.price}}
+                        </span>
+                      </h6>
+                    </div>
+                    <div class="new">
+                      <span>
+                        New
+                      </span>
+                    </div>
+                  </a>
+                  <div class="product-action">
+                    <a href="#" class="btn btn-cart-dark update-cart" data-product="{{product.id}}" data-action="add">Add to Cart</a>
+                    <a href="#" class="btn btn-cart buy-now" data-product="{{product.id}}" data-action="add">Buy</a>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+
+
+
+
+{% endblock content %}
