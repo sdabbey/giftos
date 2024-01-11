@@ -85,6 +85,7 @@
   <div class="container px-0">
     <div id="customCarousel2" class="carousel  carousel-fade" data-ride="carousel">
       <div class="carousel-inner">
+        {% for testimonial in testimonials %}
         <div class="carousel-item active">
           <div class="box">
             <div class="client_info">
@@ -103,7 +104,8 @@
             </p>
           </div>
         </div>
-        <div class="carousel-item">
+        {% endfor %}
+        <!-- <div class="carousel-item">
           <div class="box">
             <div class="client_info">
               <div class="client_name">
@@ -138,7 +140,7 @@
               Variouseditors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy, editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Variouseditors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various
             </p>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="carousel_btn-box">
         <a class="carousel-control-prev" href="#customCarousel2" role="button" data-slide="prev">
@@ -166,8 +168,8 @@
       }
     </style>
     <div class="col-md-6 col-lg-12 px-0" style="width: 100%; display: flex; flex-direction: column; align-items: center; padding: 15px;">
-      <p>Send your testimonial? Enter details below</p>
-      <form action="{% url 'contact_us' %}" class="testimonial col-lg-6 col-md-6" method="post">
+      <p style="padding: 15px; margin-bottom: 1rem; font-size: 16px;">Send your testimonial? Enter details below</p>
+      <form action="{% url 'send_testimonial' %}" class="testimonial col-lg-6 col-md-6" method="post">
         {% csrf_token %}
         <div>
           <input type="text" class="form-control" placeholder="Name" name="name" />

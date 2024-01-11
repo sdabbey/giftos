@@ -23,6 +23,7 @@ urlpatterns = [
     path('process_order/', processOrder, name="process_order"),
     path('why/', why, name="why"),
     path('testimonial/', testimonial, name="testimonial"),
+    path('testimonial/send', send_testimonial, name="send_testimonial"),
     path('contact/', contact, name="contact"),
     path('contact_us/', contact_us, name="contact_us"),
 ]

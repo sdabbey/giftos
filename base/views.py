@@ -228,8 +228,10 @@ def why(request):
 
 def testimonial(request):
     cart_data = cartData(request)
+    testimonials = Testimonial.objects.all()
     context = {
-        "cartItems": cart_data['cartItems']
+        "cartItems": cart_data['cartItems'],
+        "testimonials": testimonials
     }
     return render(request, "base/testimonial.html", context)
 
