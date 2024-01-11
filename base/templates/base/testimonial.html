@@ -68,7 +68,7 @@
 {% endblock header_section %}
 
 {% block content %}
-<section class="client_section layout_padding">
+<section class="client_section layout_padding" style="margin-top: 10vh;">
   <div class="container">
     <div class="heading_container heading_center">
       <h2>
@@ -76,6 +76,12 @@
       </h2>
     </div>
   </div>
+
+
+
+
+
+
   <div class="container px-0">
     <div id="customCarousel2" class="carousel  carousel-fade" data-ride="carousel">
       <div class="carousel-inner">
@@ -146,6 +152,43 @@
       </div>
     </div>
   </div>
+  <div class="container">
+    <style>
+      .testimonial{
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+      }
+      .testimonial .btn{
+        padding: 10px 24px;
+        border: none;
+      }
+    </style>
+    <div class="col-md-6 col-lg-12 px-0" style="width: 100%; display: flex; flex-direction: column; align-items: center; padding: 15px;">
+      <p>Send your testimonial? Enter details below</p>
+      <form action="{% url 'contact_us' %}" class="testimonial col-lg-6 col-md-6" method="post">
+        {% csrf_token %}
+        <div>
+          <input type="text" class="form-control" placeholder="Name" name="name" />
+        </div>
+        <div>
+          <input type="email" class="form-control" placeholder="Email" name="email"/>
+        </div>
+        <div>
+          <input type="number" class="form-control" placeholder="Phone" name="phonenumber"/>
+        </div>
+        <div>
+          <textarea type="text" class="message-box form-control" name="message" style="width: 100%; height: 20vh;" placeholder="Message"></textarea>
+        </div>
+        <div class="d-flex">
+          <button type="submit" class="btn btn-primary" style="background-color: #db4566;">
+            SEND
+          </button>
+        </div>
+      </form>
+    </div>
+   </div>
 </section>
 {% endblock content %}
 

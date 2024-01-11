@@ -233,6 +233,16 @@ def testimonial(request):
     }
     return render(request, "base/testimonial.html", context)
 
+def send_testimonial(request):
+    from_email=request.POST.get("email")
+    name=request.POST.get("name")
+    phone=request.POST.get("phonenumber")
+    message = request.POST.get("message")
+    email = settings.EMAIL_HOST_USER
+    htmlgen = f'<h1>{message}</h1><br><span>Name: {name}</span><br><span>Email: {from_email}</span><br><span>Phonenumber: {phone}</span>'
+    send_mail('Testimonial for Giftos Managers', message, from_email, [email], fail_silently=False, html_message=htmlgen)
+    return redirect('homepage')
+
 def contact(request):
     cart_data = cartData(request)
     context = {

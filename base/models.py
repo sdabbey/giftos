@@ -76,3 +76,11 @@ class ShippingAddress(models.Model):
     def __str__(self):
         return f'{self.customer} - {self.address}'
     
+
+class Testimonial(models.Model):
+    customer = models.CharField(max_length=100)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.customer
+    
