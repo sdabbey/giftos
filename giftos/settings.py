@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
     'base',
     'whitenoise'
 ]
@@ -122,6 +124,11 @@ USE_I18N = True
 
 USE_TZ = True
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'hydrus',
+    'API_KEY': '142126968585516',
+    'API_SECRET': 'qt7Miz7sblrP7it9ISViSBVXe8U'
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
