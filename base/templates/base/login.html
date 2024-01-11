@@ -18,6 +18,7 @@
                 {% endfor %}
             </div>
             {% endif %}
+            <p>Need an account? <a href="{% url 'register' %}">Register Here</a></p>
             <form action="" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
@@ -29,7 +30,7 @@
                     <input type="password" class="form-control" name="password" placeholder="Password">
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
-                <p>Need an account? <a href="{% url 'register' %}">Register Here</a></p>
+                <p>Forgot password? <a href="{% url 'password_reset' %}">Click Here</a></p>
             </form>
         </div>
     </div>

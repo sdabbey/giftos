@@ -239,3 +239,13 @@ def contact(request):
         "cartItems": cart_data['cartItems']
     }
     return render(request, "base/contact.html", context)
+
+def contact_us(request):
+    from_email=request.POST.get("email")
+    name=request.POST.get("name")
+    phone=request.POST.get("phonenumber")
+    message = request.POST.get("message")
+    email = settings.EMAIL_HOST_USER
+    htmlgen = f'<h1>{message}</h1><br><span>Name: {name}</span><br><span>Email: {from_email}</span><br><span>Phonenumber: {phone}</span>'
+    send_mail('Message for Giftos Managers', message, from_email, [email], fail_silently=False, html_message=htmlgen)
+    return redirect('homepage')
