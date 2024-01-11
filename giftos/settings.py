@@ -148,3 +148,4 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'dehydrus223@gmail.com'
 EMAIL_HOST_PASSWORD = 'pejt lhgf tynz pvoa'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
